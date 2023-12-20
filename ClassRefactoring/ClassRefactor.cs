@@ -4,12 +4,14 @@ namespace DeveloperSample.ClassRefactoring
 {
     public enum SwallowType
     {
-        African, European
+        African = 22,
+        European = 20,
     }
 
     public enum SwallowLoad
     {
-        None, Coconut
+        None = 0,
+        Coconut = -4
     }
 
     public class SwallowFactory
@@ -34,23 +36,10 @@ namespace DeveloperSample.ClassRefactoring
 
         public double GetAirspeedVelocity()
         {
-            if (Type == SwallowType.African && Load == SwallowLoad.None)
-            {
-                return 22;
-            }
-            if (Type == SwallowType.African && Load == SwallowLoad.Coconut)
-            {
-                return 18;
-            }
-            if (Type == SwallowType.European && Load == SwallowLoad.None)
-            {
-                return 20;
-            }
-            if (Type == SwallowType.European && Load == SwallowLoad.Coconut)
-            {
-                return 16;
-            }
-            throw new InvalidOperationException();
+            int baseSpeed = (int)Type;
+            int loadImpact = (int)Load;
+
+            return baseSpeed + loadImpact;
         }
     }
 }
